@@ -1,0 +1,10 @@
+pip install joblib
+pip install pandas
+pip install numpy
+pip install scikit-survival
+pip install tensorflow
+pip install scikit-learn
+pip install matplotlib
+pip install shap
+pip install streamlit
+pip install streamlit_extras
