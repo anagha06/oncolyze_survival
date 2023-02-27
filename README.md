@@ -6,3 +6,8 @@ Use an encoder-decoder architecture to compress and consume multi-modal inputs t
 Use survival analysis using gradient boosted trees with scikit-survival library, with features from encoder as well as clinical, genetic features.
 
 Streamlit is used to build a web-app for interaction, training visualization and prediction (inference).
+
+Initial version supports breast cancer. 
+
+TODO:
+Automatically bring in new datasets for new types of cancer. Minimal data engineering (only data preprocessing) needed.
