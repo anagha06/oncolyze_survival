@@ -8,6 +8,15 @@ from survival import SurvivalAnalysis
 
 class StreamlitSurvivalDisplay:
     def __init__(self, survival_object, X_test):
+        """
+        Initialize the StreamlitSurvivalDisplay class.
+
+        Args:
+            survival_object (object): A SurvivalAnalysis object that contains the trained survival model.
+            X_test (pandas DataFrame): The test dataset to use for inference.
+
+        Returns: None.
+        """
         st.set_option("deprecation.showPyplotGlobalUse", False)
         self.survival_object = survival_object
         self.survival_model = survival_object.model
@@ -162,18 +171,39 @@ class StreamlitSurvivalDisplay:
         return x_new
 
     def display_survival_prediction(self, x_new):
+        """
+        Displays the estimated survival probability of the patient.
+
+        Args:
+            x_new (pandas DataFrame): The dataframe containing the patient data.
+
+        Returns: None.
+        """
         self.st_subtitle("Estimated Survival Probability")
         self.survival_object.predict_survival_function(x_new)
         st.pyplot(bbox_inches="tight")
         plt.clf()
 
     def display_shap_waterfall(self, x_new):
+        """
+        Displays the Shapley scores of the patient data.
+
+        Args:
+            x_new (pandas DataFrame): The dataframe containing the patient data.
+
+        Returns: None.
+        """
         self.st_subtitle("Shapley Scores")
         self.survival_object.plot_shap_waterfall(x_new)
         st.pyplot(bbox_inches="tight")
         plt.clf()
 
     def display_feature_importance(self):
+        """
+        Displays the training feature importances of the survival model.
+
+        Returns: None.
+        """
         self.st_subtitle("Training Feature Importances")
         self.survival_object.plot_important_features()
         st.pyplot(bbox_inches="tight")
@@ -188,6 +218,20 @@ def style_metric_cards(
     border_left_color: str = "#9AD8E1",
     box_shadow: bool = True,
 ):
+    """
+    Styles the metric cards that display the training metrics.
+    This is adapted from the streamlit package which for some reason did not work for me.
+
+    Args:
+        background_color (str): The background color of the metric cards. Defaults to "#FFF".
+        border_size_px (int): The size of the border of the metric cards. Defaults to 1.
+        border_color (str): The color of the border of the metric cards. Defaults to "#CCC".
+        border_radius_px (int): The radius of the border of the metric cards. Defaults to 5.
+        border_left_color (str): The color of the left border of the metric cards. Defaults to "#9AD8E1".
+        box_shadow (bool): Whether to include a box shadow in the metric cards. Defaults to True.
+
+    Returns: None.
+    """
     box_shadow_str = (
         "box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;"
         if box_shadow
@@ -211,6 +255,13 @@ def style_metric_cards(
 
 
 def load_breast_cancer_data_and_model():
+    """
+    Loads the breast cancer dataset and the trained survival model.
+
+    Returns:
+        analysis (SurvivalAnalysis object): A SurvivalAnalysis object that contains the trained survival model.
+        breast_X (pandas DataFrame): The breast cancer dataset to use for inference.
+    """
     # data_x = pd.read_csv(os.path.join("datasets/breast/", "x.csv"))
     # data_y = pd.read_csv(os.path.join("datasets/breast/", "y.csv")).to_records(index=False)
     data_x, data_y = load_breast_cancer()
